@@ -1,0 +1,32 @@
+!pip install kafka-python
+
+from kafka import KafkaProducer
+
+producer = KafkaProducer(bootstrap_servers="IP")
+
+producer.send("test-json","{'id':221,'name':'Kemal','surname':'Kiraz'}".encode())
+
+2-Yöntem :
+student = {
+    'name':'Kemal',
+    'surname':'Kiraz',
+    'age':21,
+    'city':'Istanbul',
+    'ipAdress':"231.232.28.1"
+}
+import json
+producer.send("Topic_Name",json.dumps(student).encode())
+
+#3-Yöntem
+isim = input("Lütfen isminizi giriniz..")
+soyisim = input("Lütfen soyisimini giriniz..")
+yas = int(input("Lütfen yasinizi giriniz.."))
+sehir = input("Lütfen sehir seciniz..")
+print("Kafkaya gönderiyorum..")
+styeni = {
+    'name':isim,
+    'surname':soyisim,
+    'age':yas,
+    'city':sehir
+}
+producer.send("yenikayit",json.dumps(styeni).encode())
